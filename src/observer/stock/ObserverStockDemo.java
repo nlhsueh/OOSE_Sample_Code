@@ -44,7 +44,7 @@ public class ObserverStockDemo extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		ObserverDemo3 demo = new ObserverDemo3();
+		ObserverStockDemo demo = new ObserverStockDemo();
 		demo.setVisible(true);
 	}
 

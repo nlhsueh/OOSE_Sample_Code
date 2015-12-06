@@ -1,4 +1,4 @@
-package mvc;
+package mvc.noobserver;
 
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -9,7 +9,7 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class MVC_Demo {
+public class NoObserverDemo {
 
 	public static void main(String[] args) {
 		Counter c = new Counter();
