@@ -1,52 +1,43 @@
 package observer;
 
-import java.util.Vector;
+import java.util.Observable;
 
-class Client {
-    void testObserver() {
-        ConcreteSubject subject = new ConcreteSubject();
-        ConcreteObserver observer = new ConcreteObserver();
-        subject.addObserver(observer);
-        subject.setState(new Integer(12));
-        subject.setState(new Integer(23));
-    }
+public class ObserverTemplate {
+
+	public static void main(String[] args) {
+		Subject s = new Subject();
+
+		View1 v1 = new View1();
+		View2 v2 = new View2();
+		s.addObserver(v1);
+		s.addObserver(v2);
+	}
+
 }
 
-abstract class Subject {
-    private Vector<Observer> observers;
-    protected void addObserver(Observer o) {
-        observers.add(o);
-    }
-    protected void notifyObservers() {
-        for (Observer o : observers)
-            o.update(this);
-    }
+class Subject extends java.util.Observable {
+	int data;
+
+	public Subject() {
+		data = 0;
+	}
+
+	public void setData(int newValue) {
+		data = newValue;
+		this.setChanged();
+		this.notifyObservers();
+	}
+
 }
 
-class ConcreteSubject extends Subject {
-    private Object subjectState;
-
-    public Object getState() {
-        return subjectState;
-    }
-
-    void setState(Object newState) {
-        subjectState = newState;
-        notifyObservers();
-    }
+class View1 implements java.util.Observer {
+	public void update(Observable arg0, Object arg1) {
+		// update the view
+	}
 }
 
-interface Observer {
-    public void update(Subject s);
-}
-
-class ConcreteObserver implements Observer {
-    public void update(Subject s) {
-        try {
-            ConcreteSubject cs = (ConcreteSubject) s;
-            System.out.println("Updated: " + cs.getState());
-        } catch (Exception e) {
-            System.err.println("type mismatch");
-        }
-    }
+class View2 implements java.util.Observer {
+	public void update(Observable o, Object arg) {
+		// update the view
+	}
 }
