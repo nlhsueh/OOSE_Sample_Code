@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
- *  Counter 在此扮演 Model 的角色。注意它沒有設計任何介面與控制的設計。 
+ *  Counter 在此扮演 Model 的角色。注意它沒有設計任何介面與控制的設計。  
  */
 class Counter extends Observable {
 	int counter = 0;
