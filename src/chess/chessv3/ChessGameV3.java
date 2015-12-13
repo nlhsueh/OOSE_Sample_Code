@@ -33,8 +33,8 @@ public class ChessGameV3 extends AbstractGame {
 	 * chess generation more flexible, can be extended in the child class. 
 	 */
 	void generateAllChess() {
-		black = new Chess[] { makeChess("bKg", 1, BLACK, 0),
-				makeChess("bGu", 2, BLACK, 1), makeChess("bGu", 2, BLACK, 2),
+		black = new Chess[] { makeChess("將", 1, BLACK, 0),
+				makeChess("士", 2, BLACK, 1), makeChess("bGu", 2, BLACK, 2),
 				makeChess("bEl", 3, BLACK, 3), makeChess("bEl", 3, BLACK, 4),
 				makeChess("bRo", 3, BLACK, 5), makeChess("bRo", 3, BLACK, 6),
 				makeChess("bHo", 3, BLACK, 7), makeChess("bHo", 3, BLACK, 8),
