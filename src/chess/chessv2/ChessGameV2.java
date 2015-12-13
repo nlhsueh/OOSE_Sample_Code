@@ -28,25 +28,39 @@ public class ChessGameV2 extends AbstractGame {
 	 * Set all (32 chess), including their name, weight, location.
 	 */
 	void generateChess() {
-		black = new Chess[] { new Chess("bKg", 1, BLACK, 0),
-				new Chess("bGu", 2, BLACK, 1), new Chess("bGu", 2, BLACK, 2),
-				new Chess("bEl", 3, BLACK, 3), new Chess("bEl", 3, BLACK, 4),
-				new Chess("bRo", 3, BLACK, 5), new Chess("bRo", 3, BLACK, 6),
-				new Chess("bHo", 3, BLACK, 7), new Chess("bHo", 3, BLACK, 8),
-				new Chess("bCa", 3, BLACK, 9), new Chess("bCa", 3, BLACK, 10),
-				new Chess("bSo", 3, BLACK, 11), new Chess("bSo", 3, BLACK, 12),
-				new Chess("bSo", 3, BLACK, 13), new Chess("bSo", 3, BLACK, 14),
-				new Chess("bSo", 3, BLACK, 15), };
+		black = new Chess[] { new Chess("將", 1, BLACK, 0),
+				new Chess("士", 2, BLACK, 1),
+				new Chess("士", 2, BLACK, 2),
+				new Chess("象", 3, BLACK, 3),
+				new Chess("象", 3, BLACK, 4),
+				new Chess("車", 3, BLACK, 5),
+				new Chess("車", 3, BLACK, 6),
+				new Chess("馬", 3, BLACK, 7),
+				new Chess("馬", 3, BLACK, 8),
+				new Chess("包", 3, BLACK, 9),
+				new Chess("包", 3, BLACK, 10),
+				new Chess("卒", 3, BLACK, 11),
+				new Chess("卒", 3, BLACK, 12),
+				new Chess("卒", 3, BLACK, 13),
+				new Chess("卒", 3, BLACK, 14),
+				new Chess("卒", 3, BLACK, 15), };
 
-		red = new Chess[] { new Chess("rKg", 1, RED, 16),
-				new Chess("rGu", 2, RED, 17), new Chess("rGu", 2, RED, 18),
-				new Chess("rEl", 3, RED, 19), new Chess("rEl", 3, BLACK, 20),
-				new Chess("rRo", 3, BLACK, 21), new Chess("rRo", 3, BLACK, 22),
-				new Chess("rHo", 3, BLACK, 23), new Chess("rHo", 3, BLACK, 24),
-				new Chess("rCa", 3, BLACK, 25), new Chess("rCa", 3, BLACK, 26),
-				new Chess("rSo", 3, BLACK, 27), new Chess("rSo", 3, BLACK, 28),
-				new Chess("rSo", 3, BLACK, 29), new Chess("rSo", 3, BLACK, 30),
-				new Chess("rSo", 3, BLACK, 31), };
+		red = new Chess[] { new Chess("帥", 1, RED, 16),
+				new Chess("仕", 2, RED, 17),
+				new Chess("仕", 2, RED, 18),
+				new Chess("相", 3, RED, 19),
+				new Chess("相", 3, BLACK, 20),
+				new Chess("俥", 3, BLACK, 21),
+				new Chess("俥", 3, BLACK, 22),
+				new Chess("傌", 3, BLACK, 23),
+				new Chess("傌", 3, BLACK, 24),
+				new Chess("炮", 3, BLACK, 25),
+				new Chess("炮", 3, BLACK, 26),
+				new Chess("兵", 3, BLACK, 27),
+				new Chess("兵", 3, BLACK, 28),
+				new Chess("兵", 3, BLACK, 29),
+				new Chess("兵", 3, BLACK, 30),
+				new Chess("兵", 3, BLACK, 31), };
 
 		// change black's location
 		for (int i = 0; i < 16; i++) {

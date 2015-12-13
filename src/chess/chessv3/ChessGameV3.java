@@ -34,24 +34,24 @@ public class ChessGameV3 extends AbstractGame {
 	 */
 	void generateAllChess() {
 		black = new Chess[] { makeChess("將", 1, BLACK, 0),
-				makeChess("士", 2, BLACK, 1), makeChess("bGu", 2, BLACK, 2),
-				makeChess("bEl", 3, BLACK, 3), makeChess("bEl", 3, BLACK, 4),
-				makeChess("bRo", 3, BLACK, 5), makeChess("bRo", 3, BLACK, 6),
-				makeChess("bHo", 3, BLACK, 7), makeChess("bHo", 3, BLACK, 8),
-				makeChess("bCa", 3, BLACK, 9), makeChess("bCa", 3, BLACK, 10),
-				makeChess("bSo", 3, BLACK, 11), makeChess("bSo", 3, BLACK, 12),
-				makeChess("bSo", 3, BLACK, 13), makeChess("bSo", 3, BLACK, 14),
-				makeChess("bSo", 3, BLACK, 15), };
+				makeChess("士", 2, BLACK, 1), makeChess("士", 2, BLACK, 2),
+				makeChess("象", 3, BLACK, 3), makeChess("象", 3, BLACK, 4),
+				makeChess("車", 3, BLACK, 5), makeChess("車", 3, BLACK, 6),
+				makeChess("馬", 3, BLACK, 7), makeChess("馬", 3, BLACK, 8),
+				makeChess("包", 3, BLACK, 9), makeChess("包", 3, BLACK, 10),
+				makeChess("卒", 3, BLACK, 11), makeChess("卒", 3, BLACK, 12),
+				makeChess("卒", 3, BLACK, 13), makeChess("卒", 3, BLACK, 14),
+				makeChess("卒", 3, BLACK, 15), };
 
-		red = new Chess[] { makeChess("rKg", 1, RED, 16),
-				makeChess("rGu", 2, RED, 17), makeChess("rGu", 2, RED, 18),
-				makeChess("rEl", 3, RED, 19), makeChess("rEl", 3, BLACK, 20),
-				makeChess("rRo", 3, BLACK, 21), makeChess("rRo", 3, BLACK, 22),
-				makeChess("rHo", 3, BLACK, 23), makeChess("rHo", 3, BLACK, 24),
-				makeChess("rCa", 3, BLACK, 25), makeChess("rCa", 3, BLACK, 26),
-				makeChess("rSo", 3, BLACK, 27), makeChess("rSo", 3, BLACK, 28),
-				makeChess("rSo", 3, BLACK, 29), makeChess("rSo", 3, BLACK, 30),
-				makeChess("rSo", 3, BLACK, 31), };
+		red = new Chess[] { makeChess("帥", 1, RED, 16),
+				makeChess("仕", 2, RED, 17), makeChess("仕", 2, RED, 18),
+				makeChess("相", 3, RED, 19), makeChess("相", 3, BLACK, 20),
+				makeChess("俥", 3, BLACK, 21), makeChess("俥", 3, BLACK, 22),
+				makeChess("傌", 3, BLACK, 23), makeChess("傌", 3, BLACK, 24),
+				makeChess("炮", 3, BLACK, 25), makeChess("炮", 3, BLACK, 26),
+				makeChess("兵", 3, BLACK, 27), makeChess("兵", 3, BLACK, 28),
+				makeChess("兵", 3, BLACK, 29), makeChess("兵", 3, BLACK, 30),
+				makeChess("兵", 3, BLACK, 31), };
 
 		// change black's location
 		for (int i = 0; i < 16; i++) {
@@ -91,7 +91,7 @@ public class ChessGameV3 extends AbstractGame {
 }
 
 class Chess {
-
+	// name, weight, side (black/red), location (1-32)
 	public Chess(String name, int weight, int side, int loc) {
 		this.name = name;
 		this.weight = weight;
@@ -99,7 +99,7 @@ class Chess {
 		this.loc = loc;
 	}
 
-	String name;
+	String name; 
 	int weight;
 	int side;
 	int loc;
@@ -130,15 +130,15 @@ class Player {
 }
 
 /*
- * Location of a chess. It is composed of (x,y) x should be in the range (0,7),
- * y: (0, 3)
+ * Location of a chess. It is composed of (x,y) x should be in the range (0,3),
+ * y: (0, 7)
  */
 class Location {
 	int x, y;
 
 	public Location(int x, int y) {
-		boolean xOK = (x >= 0 && x <= 7);
-		boolean yOK = (y >= 0 && y <= 3);
+		boolean xOK = (x >= 0 && x <= 3);
+		boolean yOK = (y >= 0 && y <= 7);
 		if (!(xOK && yOK)) {
 			System.out.println("Location Error:" + x + ", " + y);
 			System.exit(0);
@@ -152,8 +152,8 @@ class Location {
 	}
 
 	public static Location getLocation(int loc) {
-		int x = (loc / 4);
-		int y = (loc % 4);
+		int x = (loc / 8);
+		int y = (loc % 8);
 		return new Location(x, y);
 	}
 }
