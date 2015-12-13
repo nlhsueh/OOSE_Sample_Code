@@ -196,14 +196,14 @@ class ChessBoard {
 		}
 	}
 
-	public void kill(int i) {
-		Chess c = (Chess) board.get(locs[i]);
+	public void kill(int loc) {
+		Chess c = (Chess) board.get(locs[loc]);
 		c.setStatus(Chess.KILLED);
-		board.put(locs[i], null);
+		board.put(locs[loc], null);
 	}
 
-	public void select(int i) {
-		Chess c = (Chess) board.get(locs[i]);
+	public void select(int loc) {
+		Chess c = (Chess) board.get(locs[loc]);
 		c.setStatus(Chess.SELECTED);
 	}
 
