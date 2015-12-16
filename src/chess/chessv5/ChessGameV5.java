@@ -59,25 +59,12 @@ class ChessGame extends AbstractGame {
 	}
 
 	void play() {
-		cb.showBoard();
-		cb.target(1);
-		cb.showBoard();
-		// Scanner sc = new Scanner(System.in);
-		// sc.nextLine();
-		cb.target(2);
-		cb.showBoard();
-		cb.target(3);
-		cb.showBoard();
-		cb.target(4);
-		cb.showBoard();
-		cb.target(5);
-		cb.showBoard();
-		cb.target(6);
-		cb.showBoard();
-		cb.target(7);
-		cb.showBoard();
-
-		
+		Scanner sc = new Scanner(System.in);
+		for (int i = 0; i < 32; i++) {
+			cb.target(i);
+			cb.showBoard();
+			sc.nextLine();
+		}
 	}
 
 	public void setPlayers() {
@@ -363,7 +350,7 @@ class ChessBoard {
 					System.out.println(c.owner.name + " Select " + c.getName());
 					select(c);
 				} else
-					System.out.println("Not your turn");
+					System.out.println("Wrong chess selected");
 			}
 			// reselect or kill
 			else {
@@ -383,11 +370,11 @@ class ChessBoard {
 			}
 		}
 	}
-	
+
 	void changeTurn() {
 		game.changeTurn();
 		selectedChess.unSelect();
-		selectedChess = null;		
+		selectedChess = null;
 	}
 
 	void showBoard() {
