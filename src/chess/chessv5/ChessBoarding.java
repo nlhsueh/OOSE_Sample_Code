@@ -32,6 +32,18 @@ class RandomChessBoarding implements ChessBoarding {
 }
 
 /*
+ * Side by side
+ */
+class SideBySideChessBoarding implements ChessBoarding {
+	public void setLocation(Chess[] chesses) {
+		for (int i = 0; i < chesses.length / 2; i++) {
+			chesses[i].setLoc(i * 2);
+			chesses[i + 16].setLoc(i * 2 + 1);
+		}
+	}
+}
+
+/*
  * 簡易的棋子排版，會依照 將士...卒帥仕...兵 的方式排版
  */
 class SimpleChessBoarding implements ChessBoarding {

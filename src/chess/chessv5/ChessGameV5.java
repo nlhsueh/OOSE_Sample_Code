@@ -37,6 +37,7 @@ class ChessGame extends AbstractGame {
 			cb = makeChessBoard(this);
 			setChessBoarding(cb, new RandomChessBoarding());
 			// setChessBoarding(cb, new SimpleChessBoarding());
+			setChessBoarding(cb, new SideBySideChessBoarding());
 
 			play();
 		}
@@ -59,12 +60,25 @@ class ChessGame extends AbstractGame {
 	}
 
 	void play() {
-		Scanner sc = new Scanner(System.in);
-		for (int i = 0; i < 32; i++) {
-			cb.target(i);
-			cb.showBoard();
-			sc.nextLine();
-		}
+		cb.target(0);
+		cb.showBoard();
+		cb.target(1);
+		cb.showBoard();
+		cb.target(3);
+		cb.showBoard();
+		cb.target(2);
+		cb.showBoard();
+		cb.target(1);
+		cb.showBoard();
+		cb.target(0);
+		cb.showBoard();
+
+		// Scanner sc = new Scanner(System.in);
+		// for (int i = 0; i < 5; i++) {
+		// cb.target(i);
+		// cb.showBoard();
+		// //sc.nextLine();
+		// }
 	}
 
 	public void setPlayers() {
@@ -77,16 +91,14 @@ class ChessGame extends AbstractGame {
 		return nextTurn;
 	}
 
-	private boolean validatePlayers() {
-		if (p1 == null) {
+	boolean validatePlayers() {
+		if (p1 == null || p2 == null)
 			return false;
-		} else if (p2 == null) {
-			return false;
-		}
 		// 必須是要一黑一紅
 		return (p1.isBLACK() && p2.isRED()) || (p1.isRED() && p2.isBLACK());
 	}
 
+	// 設定每個棋子的位置。建立 ChessBoard 與 所有棋子的關係
 	protected void setChessBoarding(ChessBoard cb, ChessBoarding boarding) {
 		boarding.setLocation(chesses);
 		cb.putChess(chesses);
@@ -96,13 +108,12 @@ class ChessGame extends AbstractGame {
 		return nextTurn;
 	}
 
+	// Factory method
 	Chess makeChess(String name, int side) {
 		return new Chess(name, side);
 	}
 
-	/*
-	 * 採用 Factory Method 來產生棋子
-	 */
+	// factory method
 	void generateAllChess() {
 		chesses = new Chess[] { makeChess("將", BLACK), makeChess("士", BLACK),
 				makeChess("士", BLACK), makeChess("象", BLACK),
@@ -120,11 +131,7 @@ class ChessGame extends AbstractGame {
 				makeChess("兵", RED) };
 	}
 
-	// void setPlayers(Player p1, Player p2) {
-	// this.p1 = p1;
-	// this.p2 = p2;
-	// }
-
+	// just for debugging
 	void showAllChess() {
 		System.out.println("Players: " + p1 + " vs. " + p2);
 		for (Chess c : chesses) {
@@ -140,12 +147,13 @@ class Chess {
 
 	private String name;
 	int weight;
-	int side;
-	int loc;
-	int status;
-	Player owner;
+	int side; // BLACK or RED
+	int loc; // 1..32
+	int status; // CREATED, SELECTED, KILLED
+	Player owner; // the owner of the chess, owner.side should be equals to
+					// chess.side
 
-	Location location;
+	Location location; // set by chess board
 
 	public Chess(String name, int side) {
 		this.name = name;
@@ -153,7 +161,7 @@ class Chess {
 		status = Chess.CREATED;
 	}
 
-	public void setOwner(Player p1) {
+	void setOwner(Player p1) {
 		this.owner = p1;
 	}
 
@@ -166,6 +174,7 @@ class Chess {
 	}
 
 	void setLocation(Location location) {
+		assert location.getLoc() == loc;
 		this.location = location;
 	}
 
@@ -175,14 +184,6 @@ class Chess {
 
 	void setLoc(int i) {
 		this.loc = i;
-	}
-
-	public String toString() {
-		return name + "," + " loc=" + getLocation() + ", staus =" + status;
-	}
-
-	public void setStatus(int s) {
-		this.status = s;
 	}
 
 	void select() {
@@ -202,14 +203,18 @@ class Chess {
 		this.loc = loc;
 	}
 
-	public Player owner() {
-		return null;
+	public Player getOwner() {
+		return owner;
 	}
 
 	public void killed() {
 		status = KILLED;
 		loc = -1;
 		location = null;
+	}
+
+	public String toString() {
+		return name + "," + " loc=" + loc + ", staus =" + status;
 	}
 }
 
@@ -218,14 +223,10 @@ class Player {
 	String name;
 	int side;
 
-	public Player(AbstractGame game, String n, int side) {
+	public Player(AbstractGame game, String name, int side) {
 		this.game = game;
-		this.name = n;
+		this.name = name;
 		this.side = side;
-	}
-
-	public String toString() {
-		return name;
 	}
 
 	public int getSide() {
@@ -242,6 +243,10 @@ class Player {
 
 	boolean myTurn() {
 		return ((game.nextTurn()) == this);
+	}
+
+	public String toString() {
+		return name;
 	}
 }
 
@@ -267,19 +272,13 @@ class Location {
 		this.y = y;
 	}
 
-	public String toString() {
-		return "(" + x + ", " + y + ")";
-	}
-
-	public static Location getLocation(int loc) {
-		int x = (loc / 8);
-		int y = (loc % 8);
-		return new Location(x, y);
-	}
-
 	int getLoc() {
 		int result = 8 * x + y;
 		return result;
+	}
+
+	public String toString() {
+		return "(" + x + ", " + y + ")";
 	}
 }
 
@@ -307,8 +306,7 @@ class ChessBoard {
 			Chess c = chesses[i];
 			int loc = c.getLoc();
 			c.setLocation(locs[loc]);
-			if (c.getLocation() != locs[c.getLoc()])
-				System.out.println("Error");
+			assert (c.getLocation() == locs[c.getLoc()]) : "Location setting error";
 			board.put(locs[loc], c);
 		}
 	}
@@ -325,7 +323,14 @@ class ChessBoard {
 	private void select(Chess c) {
 		c.select();
 		selectedChess = c;
-		// System.out.println("selected chess" + c.getName());
+	}
+
+	private void move(Chess c, int loc) {
+		Location moverLocation = c.getLocation();
+		board.put(moverLocation, null); //! the move doesn't work
+		board.put(locs[loc], c);
+		c.move(loc);
+		c.unSelect();
 	}
 
 	/*
@@ -337,10 +342,10 @@ class ChessBoard {
 			// move
 			System.out.println(selectedChess.getName() + " move to " + loc);
 			if (selectedChess != null) {
-				selectedChess.move(loc);
+				move(selectedChess, loc);
 				changeTurn();
 			} else {
-				// do nothing
+				// user click the empty cell, do nothing
 			}
 		}
 		// select or kill
@@ -350,7 +355,7 @@ class ChessBoard {
 					System.out.println(c.owner.name + " Select " + c.getName());
 					select(c);
 				} else
-					System.out.println("Wrong chess selected");
+					System.out.println("You can't select this chess");
 			}
 			// reselect or kill
 			else {
@@ -371,7 +376,7 @@ class ChessBoard {
 		}
 	}
 
-	void changeTurn() {
+	private void changeTurn() {
 		game.changeTurn();
 		selectedChess.unSelect();
 		selectedChess = null;
