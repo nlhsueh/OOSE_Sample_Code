@@ -72,6 +72,10 @@ class ChessGame extends AbstractGame {
 		cb.showBoard();
 		cb.target(0);
 		cb.showBoard();
+		cb.target(2);
+		cb.showBoard();
+		cb.target(3);
+		cb.showBoard();
 
 		// Scanner sc = new Scanner(System.in);
 		// for (int i = 0; i < 5; i++) {
@@ -317,6 +321,7 @@ class ChessBoard {
 		board.put(killerLocation, null);
 		board.put(c.getLocation(), killer);
 		killer.move(c.getLoc());
+		killer.location = c.getLocation();
 		c.killed();
 	}
 
@@ -325,12 +330,14 @@ class ChessBoard {
 		selectedChess = c;
 	}
 
-	private void move(Chess c, int loc) {
-		Location moverLocation = c.getLocation();
-		board.put(moverLocation, null); //! the move doesn't work
-		board.put(locs[loc], c);
-		c.move(loc);
-		c.unSelect();
+	private void move(Chess mover, int loc) {
+		Location moverLocation = mover.getLocation();
+		System.out.println(moverLocation);
+		board.put(moverLocation, null); // ! the move doesn't work
+		board.put(locs[loc], mover);
+		mover.move(loc);
+		mover.location = locs[loc];
+		mover.unSelect();
 	}
 
 	/*
