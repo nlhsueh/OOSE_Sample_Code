@@ -1,5 +1,4 @@
-package edu.fcu.oose.basic.state;
-
+package state;
 
 public class StateDemo {
 
@@ -8,7 +7,7 @@ public class StateDemo {
 	 */
 	public static void main(String[] args) {
 		A a = new A();
-		System.out.println(a);		
+		System.out.println(a);
 		a.request();
 		System.out.println(a);
 		a.request();
@@ -23,7 +22,7 @@ public class StateDemo {
 class A {
 	State s;
 
-	//the default state is S1
+	// the default state is S1
 	public A() {
 		s = new S1();
 	}
@@ -35,7 +34,7 @@ class A {
 	void setState(State _s) {
 		this.s = _s;
 	}
-	
+
 	public String toString() {
 		return s.toString();
 	}
