@@ -3,7 +3,7 @@ package factorymethod;
 abstract class Creator {
 	Product p;
 
-	public void createProduct() {
+	public void doSomething() {
 		p = factoryMethod();
 		// ...
 	}
