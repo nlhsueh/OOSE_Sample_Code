@@ -2,7 +2,6 @@ package chess.chessmvc;
 
 import java.awt.event.MouseListener;
 import java.util.Vector;
-
 import javax.swing.JPanel;
 
 public class ChessMVC {

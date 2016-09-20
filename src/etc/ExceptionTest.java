@@ -1,3 +1,5 @@
+package etc;
+
 import java.util.Scanner;
 
 public class ExceptionTest {
