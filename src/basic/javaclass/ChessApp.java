@@ -26,11 +26,27 @@ public class ChessApp {
 }
 
 class Chess {
-	String name;
-	int id;
+	String name; //for simple, just use A1, A2 as the chess name
+	int weight;
 	int location;
 }
 
 class ChessGame {
+	
+	
+	
+	/*
+	 * show the all messages of the chess game, including
+	 * - who are the players?
+	 * - all chess name and their location
+	 * - who's turn to play the next?
+	 */
+	void show() {
+		
+	}
+	
+}
+
+class Player {
 	
 }
