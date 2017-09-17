@@ -1,2 +1,4 @@
 
-這是 物件導向軟體工程（OOSE）設計樣式的 Template Code 或是範例程式。你可以透過這些簡單的程式來了解課堂上的上課內容。
+這是 物件導向軟體工程（OOSE）設計樣式的 Template Code 或是範例程式。
+
+Book: http://www.pubu.com.tw/ebook/104835
